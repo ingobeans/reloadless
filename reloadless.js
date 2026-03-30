@@ -10,6 +10,8 @@ function newPageClickHook(newText) {
     setUpLinks();
 }
 
+originalState = undefined;
+
 function onPress(event) {
     event.preventDefault();
     let url = this.getAttribute("href");
@@ -19,6 +21,9 @@ function onPress(event) {
             if (url != lastClickedLink) {
                 return;
             }
+            if (window.history.state == null) {
+                originalState = { html: document.documentElement.innerHTML };
+            }
             newPageClickHook(text);
             window.history.pushState({ html: text }, "", url);
         })
@@ -27,7 +32,12 @@ function onPress(event) {
 
 window.addEventListener("popstate", (e) => {
     if (e.state && e.state.html) {
+        if (originalState == undefined) {
+            originalState = { html: document.documentElement.innerHTML };
+        }
         newPageClickHook(e.state.html);
+    } else if (originalState) {
+        newPageClickHook(originalState.html);
     }
 });
 
