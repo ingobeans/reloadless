@@ -11,7 +11,6 @@ function onPress(event) {
     event.preventDefault();
     let url = this.getAttribute("href");
     lastClickedLink = url;
-    console.log(url);
     fetch(url).then((response) => {
         response.text().then((text) => {
             if (url != lastClickedLink) {
