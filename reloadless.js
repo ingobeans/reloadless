@@ -1,3 +1,6 @@
+// used to track which link was last pressed.
+// if you click one link, then another before the first finishes loading,
+// this variable ensures you will only be sent to the second link.
 lastClickedLink = undefined;
 
 function newPageClickHook(newText) {
