@@ -44,6 +44,5 @@ function setUpLinks() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("WA");
     setUpLinks();
 })
