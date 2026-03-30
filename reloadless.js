@@ -33,11 +33,8 @@ window.addEventListener("popstate", (e) => {
 
 
 function setUpLinks() {
-    let links = document.querySelectorAll("a");
+    let links = document.querySelectorAll("a[reloadless]:not([reloadless='tracked'])");
     for (let link of links) {
-        if (link.getAttribute("reloadless") != null) {
-            continue
-        }
         link.setAttribute("reloadless", "tracked");
         link.addEventListener("click", onPress.bind(link));
     }
