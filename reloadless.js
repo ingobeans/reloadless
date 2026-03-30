@@ -37,7 +37,12 @@ window.addEventListener("popstate", (e) => {
         }
         newPageClickHook(e.state.html);
     } else if (originalState) {
-        newPageClickHook(originalState.html);
+        var doc = new DOMParser().parseFromString(originalState.html, "text/html");
+        let links = doc.querySelectorAll("a[reloadless='tracked']");
+        for (let link of links) {
+            link.setAttribute("reloadless", null);
+        }
+        newPageClickHook(doc.documentElement.innerHTML);
     }
 });
 
