@@ -1,6 +1,8 @@
 lastClickedLink = undefined;
 
 function newPageClickHook(newText) {
+    // this hook follows the standard link click behaviour,
+    // but can be replaced with anything!
     document.documentElement.innerHTML = newText;
     setUpLinks();
 }
@@ -22,8 +24,8 @@ function onPress(event) {
 }
 
 window.addEventListener("popstate", (e) => {
-    if (e.state) {
-        document.documentElement.innerHTML = e.state.html;
+    if (e.state && e.state.html) {
+        newPageClickHook(e.state.html);
     }
 });
 
